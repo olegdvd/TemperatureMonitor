@@ -16,7 +16,7 @@ public class SensorData {
     private LocalDateTime timestamp;
 
     public SensorData() {
-        //empty
+        //empty for JSON mapper
     }
 
     public SensorData(double value1, double value2, double value3, double value4) {

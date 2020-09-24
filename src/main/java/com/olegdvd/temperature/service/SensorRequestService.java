@@ -5,6 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.Optional;
+
 @Service
 public class SensorRequestService {
 
@@ -15,9 +19,16 @@ public class SensorRequestService {
         this.restTemplate = restTemplate;
     }
 
-    public ResponseEntity<SensorData> getDataFromSensor(String sensorId){
-        ResponseEntity<SensorData> sensorDataResponseEntity = restTemplate.getForEntity(URL, SensorData.class);
-        System.out.println(sensorId);
-        return sensorDataResponseEntity;
+    public Optional<SensorData> getDataFromSensor(String sensorId, String urlString) {
+        return mapToObjWithTimestamp(restTemplate.getForEntity(urlString, SensorData.class));
+    }
+
+    private Optional<SensorData> mapToObjWithTimestamp(ResponseEntity<SensorData> responseEntity) {
+        SensorData body = responseEntity.getBody();
+        if (Objects.nonNull(body)) {
+            body.setTimestamp(LocalDateTime.now());
+            return Optional.of(body);
+        }
+        return Optional.empty();
     }
 }
