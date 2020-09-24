@@ -1,8 +1,11 @@
 package com.olegdvd.temperature.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SensorData {
 
     private String id;
@@ -12,12 +15,16 @@ public class SensorData {
     private double value4;
     private LocalDateTime timestamp;
 
-    public SensorData(double value1, double value2, double value3, double value4, LocalDateTime timestamp) {
+    public SensorData() {
+        //empty
+    }
+
+    public SensorData(double value1, double value2, double value3, double value4) {
         this.value1 = value1;
         this.value2 = value2;
         this.value3 = value3;
         this.value4 = value4;
-        this.timestamp = timestamp;
+        this.timestamp = LocalDateTime.now();
     }
 
     public String getId() {
