@@ -2,18 +2,17 @@ package com.olegdvd.temperature.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.Entity;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SensorData {
 
-    private String id;
     private double value1;
     private double value2;
     private double value3;
     private double value4;
-    private LocalDateTime timestamp;
 
     public SensorData() {
         //empty for JSON mapper
@@ -24,15 +23,6 @@ public class SensorData {
         this.value2 = value2;
         this.value3 = value3;
         this.value4 = value4;
-        this.timestamp = LocalDateTime.now();
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public double getValue1() {
@@ -67,37 +57,13 @@ public class SensorData {
         this.value4 = value4;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SensorData that = (SensorData) o;
-        return id.equals(that.id) &&
-                timestamp.equals(that.timestamp);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, timestamp);
-    }
-
     @Override
     public String toString() {
         return new org.apache.commons.lang3.builder.ToStringBuilder(this)
-                .append("id", id)
                 .append("value1", value1)
                 .append("value2", value2)
                 .append("value3", value3)
                 .append("value4", value4)
-                .append("timestamp", timestamp)
                 .toString();
     }
 }

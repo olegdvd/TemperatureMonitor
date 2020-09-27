@@ -36,6 +36,7 @@ public class SensorDataTest {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        assert sensorData != null;
         assertEquals(5494.518, sensorData.getValue1(), 0);
     }
 }
