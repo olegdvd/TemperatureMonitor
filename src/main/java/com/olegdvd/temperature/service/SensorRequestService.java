@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 public class SensorRequestService {
 
     private final RestTemplate restTemplate;
-    private static final String URL = "";
     private final InfoRepository<SensorInfo> repository;
     private final GatheredSensorDateRepository gatheredSensorDateRepo;
 
