@@ -20,5 +20,9 @@ public class GatheredSensorDataService {
     public List<GatheredSensorData> getAllSensorData() {
         return gatheredSensorDateRepository.findAll();
     }
+
+    public List<GatheredSensorData> getSensorData(String sensorId) {
+        return gatheredSensorDateRepository.findAllBySensorId(sensorId);
+    }
 }
 

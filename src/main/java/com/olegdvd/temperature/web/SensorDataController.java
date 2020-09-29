@@ -1,10 +1,10 @@
 package com.olegdvd.temperature.web;
 
 import com.olegdvd.temperature.domain.GatheredSensorData;
-import com.olegdvd.temperature.repository.GatheredSensorDateRepository;
 import com.olegdvd.temperature.service.GatheredSensorDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,9 +22,14 @@ public class SensorDataController {
     }
 
 
-    @GetMapping
+    @GetMapping("/")
     public List<GatheredSensorData> getGatheredSensorData() {
         return gatheredSensorDataService.getAllSensorData();
+    }
+
+    @GetMapping("/{sensorId}")
+    public List<GatheredSensorData> getGatheredSensorDataById(@PathVariable("sensorId") String sensorId) {
+        return gatheredSensorDataService.getSensorData(sensorId);
     }
 
 }
