@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/temperature")
 public class HomeController {
 
+    //TODO should be removed or updated
     @GetMapping("/home")
     public String home() {
         return "home";
