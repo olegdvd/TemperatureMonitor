@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDateTime;
+import java.time.Clock;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -24,12 +24,14 @@ public class SensorRequestService {
     private final RestTemplate restTemplate;
     private final InfoRepository<SensorInfo> repository;
     private final GatheredSensorDateRepository gatheredSensorDateRepo;
+    private final Clock clock;
 
     @Autowired
-    public SensorRequestService(RestTemplate restTemplate, SensorInfoLocalRepository repository, GatheredSensorDateRepository gatheredSensorDateRepo) {
+    public SensorRequestService(RestTemplate restTemplate, SensorInfoLocalRepository repository, GatheredSensorDateRepository gatheredSensorDateRepo, Clock clock) {
         this.restTemplate = restTemplate;
         this.repository = repository;
         this.gatheredSensorDateRepo = gatheredSensorDateRepo;
+        this.clock = clock;
     }
 
     @Scheduled(fixedRate = 5000)
@@ -47,8 +49,8 @@ public class SensorRequestService {
     public GatheredSensorData getDataFromSensor(SensorInfo sensorInfo) {
         Optional<SensorData> opSensorData = mapToObjWithTimestamp(restTemplate.getForEntity(sensorInfo.getUrl(), SensorData.class));
         return opSensorData
-                .map(sensorData -> new GatheredSensorData(sensorData, sensorInfo))
-                .orElse(new GatheredSensorData(sensorInfo));
+                .map(sensorData -> new GatheredSensorData(sensorData, sensorInfo, clock))
+                .orElse(new GatheredSensorData(sensorInfo, clock));
     }
 
     private Optional<SensorData> mapToObjWithTimestamp(ResponseEntity<SensorData> responseEntity) {
