@@ -10,4 +10,5 @@ import java.util.List;
 public interface GatheredSensorDateRepository extends JpaRepository <GatheredSensorData, String> {
 
     List<GatheredSensorData> findAllBySensorId(String sensorId);
+
 }
