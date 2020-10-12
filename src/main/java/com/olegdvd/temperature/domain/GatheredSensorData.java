@@ -43,15 +43,6 @@ public class GatheredSensorData {
         timestamp = LocalDateTime.now(this.clock);
     }
 
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public GatheredSensorData(SensorInfo sensorInfo, Clock clock) {
         this.sensorId = sensorInfo.getId();
         this.value1 = 0;
@@ -60,6 +51,14 @@ public class GatheredSensorData {
         this.value4 = 0;
         this.clock = clock;
         timestamp = LocalDateTime.now(this.clock);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setSensorId(String id) {

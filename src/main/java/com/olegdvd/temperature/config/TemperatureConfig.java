@@ -19,6 +19,11 @@ public class TemperatureConfig {
         return builder.build();
     }
 
+//    @Bean
+//    public RestTemplate restTemplate() {
+//        return new RestTemplate();
+//    }
+
     @Bean
     public Clock clock(){
         return Clock.systemDefaultZone();
