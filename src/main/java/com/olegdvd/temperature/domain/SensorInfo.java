@@ -2,7 +2,6 @@ package com.olegdvd.temperature.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
 
 @Entity
 public class SensorInfo {

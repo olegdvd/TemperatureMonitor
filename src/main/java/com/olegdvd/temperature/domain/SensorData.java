@@ -2,10 +2,6 @@ package com.olegdvd.temperature.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import java.time.LocalDateTime;
-import java.util.Objects;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SensorData {
 
