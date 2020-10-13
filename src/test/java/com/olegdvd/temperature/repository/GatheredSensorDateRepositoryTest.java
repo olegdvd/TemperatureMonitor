@@ -10,12 +10,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.*;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -38,10 +40,10 @@ public class GatheredSensorDateRepositoryTest {
     public void setUp() {
         when(clock.millis()).thenReturn(1601402400000L, 1601402400001L, 1601402400002L, 1601402400003L);
         when(clock.getZone()).thenReturn(ZoneId.of("UTC"));
-//        when(clock.getZone().getRules().getOffset(any(Instant.class))).thenReturn(ZoneOffset.UTC);
         when(clock.instant()).thenReturn(
                 Instant.ofEpochMilli(1601402400000L), Instant.ofEpochMilli(1601402400001L),
                 Instant.ofEpochMilli(1601402400002L), Instant.ofEpochMilli(1601402400003L));
+
         List<GatheredSensorData> list = Arrays.asList(
                 createGatheredSensorData(1L, SENSOR_1, 123.01, 234.01, 456.01),
                 createGatheredSensorData(2L, SENSOR_2, 987.01, 876.01, 654.00),
